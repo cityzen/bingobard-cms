@@ -12,6 +12,8 @@ import { Users } from './collections/Users'
 import { Media } from './collections/Media'
 import { Events } from './collections/Events'
 import { Testimonials } from './collections/Testimonials'
+import { FeatureCards } from './collections/FeatureCards'
+import { Verticals } from './collections/Verticals'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -65,7 +67,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media, Events, Testimonials],
+  collections: [Users, Media, Events, Testimonials, FeatureCards, Verticals],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {

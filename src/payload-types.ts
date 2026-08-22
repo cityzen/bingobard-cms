@@ -71,6 +71,8 @@ export interface Config {
     media: Media;
     events: Event;
     testimonials: Testimonial;
+    'feature-cards': FeatureCard;
+    verticals: Vertical;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -82,6 +84,8 @@ export interface Config {
     media: MediaSelect<false> | MediaSelect<true>;
     events: EventsSelect<false> | EventsSelect<true>;
     testimonials: TestimonialsSelect<false> | TestimonialsSelect<true>;
+    'feature-cards': FeatureCardsSelect<false> | FeatureCardsSelect<true>;
+    verticals: VerticalsSelect<false> | VerticalsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -169,10 +173,10 @@ export interface Media {
  */
 export interface Event {
   id: number;
-  'Event Title': string;
-  'Event Location': string;
-  'Event Start Date': string;
-  'Event End Date': string;
+  title: string;
+  location: string;
+  startDate: string;
+  endDate: string;
   updatedAt: string;
   createdAt: string;
 }
@@ -182,10 +186,10 @@ export interface Event {
  */
 export interface Testimonial {
   id: number;
-  'Player Name': string;
-  'Player Title': string;
-  Event?: (number | null) | Event;
-  Testimonial: {
+  playerName: string;
+  playerTitle?: string | null;
+  event?: (number | null) | Event;
+  testimonial: {
     root: {
       type: string;
       children: {
@@ -200,6 +204,33 @@ export interface Testimonial {
     };
     [k: string]: unknown;
   };
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "feature-cards".
+ */
+export interface FeatureCard {
+  id: number;
+  type: 'benefit' | 'type';
+  icon: string;
+  title: string;
+  description: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "verticals".
+ */
+export interface Vertical {
+  id: number;
+  title: string;
+  heroTitle: string;
+  heroDescription: string;
+  featureCardsBenefit?: (number | null) | FeatureCard;
+  featureCardsType?: (number | null) | FeatureCard;
   updatedAt: string;
   createdAt: string;
 }
@@ -242,6 +273,14 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'testimonials';
         value: number | Testimonial;
+      } | null)
+    | ({
+        relationTo: 'feature-cards';
+        value: number | FeatureCard;
+      } | null)
+    | ({
+        relationTo: 'verticals';
+        value: number | Vertical;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -328,10 +367,10 @@ export interface MediaSelect<T extends boolean = true> {
  * via the `definition` "events_select".
  */
 export interface EventsSelect<T extends boolean = true> {
-  'Event Title'?: T;
-  'Event Location'?: T;
-  'Event Start Date'?: T;
-  'Event End Date'?: T;
+  title?: T;
+  location?: T;
+  startDate?: T;
+  endDate?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -340,10 +379,35 @@ export interface EventsSelect<T extends boolean = true> {
  * via the `definition` "testimonials_select".
  */
 export interface TestimonialsSelect<T extends boolean = true> {
-  'Player Name'?: T;
-  'Player Title'?: T;
-  Event?: T;
-  Testimonial?: T;
+  playerName?: T;
+  playerTitle?: T;
+  event?: T;
+  testimonial?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "feature-cards_select".
+ */
+export interface FeatureCardsSelect<T extends boolean = true> {
+  type?: T;
+  icon?: T;
+  title?: T;
+  description?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "verticals_select".
+ */
+export interface VerticalsSelect<T extends boolean = true> {
+  title?: T;
+  heroTitle?: T;
+  heroDescription?: T;
+  featureCardsBenefit?: T;
+  featureCardsType?: T;
   updatedAt?: T;
   createdAt?: T;
 }

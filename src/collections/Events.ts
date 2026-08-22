@@ -1,25 +1,28 @@
 import type { CollectionConfig } from 'payload'
 
 export const Events: CollectionConfig = {
+	admin: {
+		useAsTitle: 'title',
+	},
   slug: 'events',
   fields: [
 	{
-		name: 'Event Title',
+		name: 'title',
 		type: 'text',
 		required: true,
 	},
     {
-	  	name: 'Event Location',
+	  	name: 'location',
 	  	type: 'text',
 	  	required: true,
 	},
 	{
-		name: 'Event Start Date',
+		name: 'startDate',
 		type: 'date',
 		required: true,
   	},
 	{
-		name: 'Event End Date',
+		name: 'endDate',
 		type: 'date',
 		required: true,
 	},
