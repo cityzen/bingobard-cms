@@ -5,6 +5,11 @@ export const Testimonials: CollectionConfig = {
 		useAsTitle: 'playerName',
 	  },
   slug: 'testimonials',
+  // Real quotes attributed to named people, with their title and the event
+  // they spoke at — not public until you decide it should be.
+  access: {
+    read: ({ req: { user } }) => Boolean(user),
+  },
   fields: [
 	{
 		name: 'playerName',

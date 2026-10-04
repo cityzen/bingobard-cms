@@ -5,6 +5,10 @@ export const Verticals: CollectionConfig = {
 		useAsTitle: 'title',
 	},
   slug: 'verticals',
+  // Nested testimonials are not populated here, so this is safe to expose.
+  access: {
+    read: () => true,
+  },
   fields: [
 	{
 		  name: 'title',
@@ -13,7 +17,7 @@ export const Verticals: CollectionConfig = {
 	},
 	{
 		name: 'heroTitle',
-		type: 'text',
+		type: 'textarea',
 		required: true,
 	  },
 	{
@@ -22,24 +26,76 @@ export const Verticals: CollectionConfig = {
 		required: true,
 	},
 	{
-		name: 'featureCardsBenefit',
-		type: 'relationship',
-		relationTo: 'feature-cards',
-		filterOptions: ({ relationTo, siblingData }) => {
-			  return {
-				type: { equals: 'benefit' },
-			  }
-		  },
-	  },
-	  {
-		  name: 'featureCardsType',
-		  type: 'relationship',
-		  relationTo: 'feature-cards',
-		  filterOptions: ({ relationTo, siblingData }) => {
-				return {
-				  type: { equals: 'type' },
-				}
-			},
+      name: 'benefits',
+      type: 'group', // required
+      interfaceName: 'Benefits', // optional
+      fields: [
+        // required
+        {
+          name: 'title',
+          type: 'textarea',
+          required: true
+        },
+        {
+		name: 'benefitCards',
+		type: 'array',
+		fields: [
+		{
+			name: 'icon',
+			type: 'text',
+			required: false,
 		},
+			{
+				name: 'benefit',
+				type: 'text',
+				required: true,
+			},
+			{
+				name: 'description',
+				type: 'text',
+				required: true,
+			},
+		],
+	},
+      ],
+    },
+
+    {
+         name: 'types',
+         type: 'group', // required
+         interfaceName: 'Types', // optional
+         fields: [
+           // required
+           {
+             name: 'title',
+             type: 'textarea',
+             required: true
+           },
+		{
+name: 'useCards',
+type: 'array',
+fields: [
+{
+name: 'icon',
+type: 'text',
+required: false,
+},
+{
+name: 'use',
+type: 'text',
+required: true,
+},
+{
+name: 'description',
+type: 'text',
+required: true,
+},
+],
+},
+         ],
+       },
+
+
+
   ],
 }

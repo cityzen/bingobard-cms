@@ -5,6 +5,10 @@ export const Events: CollectionConfig = {
 		useAsTitle: 'title',
 	},
   slug: 'events',
+  // Events are public marketing content; no testimonial or logo data here.
+  access: {
+    read: () => true,
+  },
   fields: [
 	{
 		name: 'title',
@@ -15,6 +19,11 @@ export const Events: CollectionConfig = {
 	  	name: 'location',
 	  	type: 'text',
 	  	required: true,
+	},
+    {
+	  	name: 'client',
+      type: 'relationship',
+      relationTo: 'clients',
 	},
 	{
 		name: 'startDate',
