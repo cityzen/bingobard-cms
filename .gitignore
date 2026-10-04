@@ -52,3 +52,5 @@ node_modules/
 # OpenNext
 .open-next
 .wrangler
+# local db backups from pull-production-db.sh
+scripts/db-backups/
