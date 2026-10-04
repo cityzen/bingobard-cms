@@ -5,12 +5,9 @@
  *
  * Idempotent: safe to re-run after a `pnpm run dev:reset-db`.
  *
- * Note: production's `testimonials.event_id` doesn't map to anything in the
- * current schema (Testimonials now links to `collections`, not `events`,
- * and no Collections/Clients existed in production) — that link is dropped.
- * The actual content (names, titles, quotes) carries over; re-link each
- * testimonial to a collection by hand once you've entered your real
- * clients/collections.
+ * Note: `events.client_id` is null across the board in production (no Clients
+ * were ever entered), so event records seed without a client link. Testimonials
+ * keep their `event` link — `event_id` in the seed JSON is the production id.
  *
  * Also note: production's verticals are still in the pre-`simplify_verticals`
  * shape (relationship columns to a `feature_cards` table that no longer
@@ -54,6 +51,19 @@ async function seed() {
   for (const t of testimonialsData) {
     const testimonialRichText = JSON.parse(t.testimonial)
 
+    // Resolve the event by title: production ids don't necessarily match a
+    // fresh local D1, so the seed stores both and links on the stable one.
+    let eventId: number | string | undefined
+    if (t.event_title) {
+      const ev = await payload.find({
+        collection: 'events',
+        where: { title: { equals: t.event_title } },
+        limit: 1,
+      })
+      eventId = ev.docs[0]?.id
+      if (!eventId) console.warn('  ! no matching event for', t.event_title)
+    }
+
     const existing = await payload.find({
       collection: 'testimonials',
       where: { playerName: { equals: t.player_name } },
@@ -72,6 +82,7 @@ async function seed() {
       data: {
         playerName: t.player_name,
         playerTitle: t.player_title || undefined,
+        event: eventId ?? undefined,
         testimonial: testimonialRichText,
       },
     })
