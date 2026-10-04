@@ -316,6 +316,13 @@
           "notNull": true,
           "autoincrement": false
         },
+        "client_id": {
+          "name": "client_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
         "start_date": {
           "name": "start_date",
           "type": "text",
@@ -348,6 +355,13 @@
         }
       },
       "indexes": {
+        "events_client_idx": {
+          "name": "events_client_idx",
+          "columns": [
+            "client_id"
+          ],
+          "isUnique": false
+        },
         "events_updated_at_idx": {
           "name": "events_updated_at_idx",
           "columns": [
@@ -363,7 +377,21 @@
           "isUnique": false
         }
       },
-      "foreignKeys": {},
+      "foreignKeys": {
+        "events_client_id_clients_id_fk": {
+          "name": "events_client_id_clients_id_fk",
+          "tableFrom": "events",
+          "tableTo": "clients",
+          "columnsFrom": [
+            "client_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        }
+      },
       "compositePrimaryKeys": {},
       "uniqueConstraints": {},
       "checkConstraints": {}
@@ -465,20 +493,27 @@
       "uniqueConstraints": {},
       "checkConstraints": {}
     },
-    "feature_cards": {
-      "name": "feature_cards",
+    "verticals_benefits_benefit_cards": {
+      "name": "verticals_benefits_benefit_cards",
       "columns": {
-        "id": {
-          "name": "id",
+        "_order": {
+          "name": "_order",
           "type": "integer",
-          "primaryKey": true,
+          "primaryKey": false,
           "notNull": true,
           "autoincrement": false
         },
-        "type": {
-          "name": "type",
-          "type": "text",
+        "_parent_id": {
+          "name": "_parent_id",
+          "type": "integer",
           "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
           "notNull": true,
           "autoincrement": false
         },
@@ -486,11 +521,11 @@
           "name": "icon",
           "type": "text",
           "primaryKey": false,
-          "notNull": true,
+          "notNull": false,
           "autoincrement": false
         },
-        "title": {
-          "name": "title",
+        "benefit": {
+          "name": "benefit",
           "type": "text",
           "primaryKey": false,
           "notNull": true,
@@ -502,41 +537,120 @@
           "primaryKey": false,
           "notNull": true,
           "autoincrement": false
-        },
-        "updated_at": {
-          "name": "updated_at",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false,
-          "default": "(strftime('%Y-%m-%dT%H:%M:%fZ', 'now'))"
-        },
-        "created_at": {
-          "name": "created_at",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false,
-          "default": "(strftime('%Y-%m-%dT%H:%M:%fZ', 'now'))"
         }
       },
       "indexes": {
-        "feature_cards_updated_at_idx": {
-          "name": "feature_cards_updated_at_idx",
+        "verticals_benefits_benefit_cards_order_idx": {
+          "name": "verticals_benefits_benefit_cards_order_idx",
           "columns": [
-            "updated_at"
+            "_order"
           ],
           "isUnique": false
         },
-        "feature_cards_created_at_idx": {
-          "name": "feature_cards_created_at_idx",
+        "verticals_benefits_benefit_cards_parent_id_idx": {
+          "name": "verticals_benefits_benefit_cards_parent_id_idx",
           "columns": [
-            "created_at"
+            "_parent_id"
           ],
           "isUnique": false
         }
       },
-      "foreignKeys": {},
+      "foreignKeys": {
+        "verticals_benefits_benefit_cards_parent_id_fk": {
+          "name": "verticals_benefits_benefit_cards_parent_id_fk",
+          "tableFrom": "verticals_benefits_benefit_cards",
+          "tableTo": "verticals",
+          "columnsFrom": [
+            "_parent_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "verticals_types_use_cards": {
+      "name": "verticals_types_use_cards",
+      "columns": {
+        "_order": {
+          "name": "_order",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "_parent_id": {
+          "name": "_parent_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "icon": {
+          "name": "icon",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "use": {
+          "name": "use",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "description": {
+          "name": "description",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {
+        "verticals_types_use_cards_order_idx": {
+          "name": "verticals_types_use_cards_order_idx",
+          "columns": [
+            "_order"
+          ],
+          "isUnique": false
+        },
+        "verticals_types_use_cards_parent_id_idx": {
+          "name": "verticals_types_use_cards_parent_id_idx",
+          "columns": [
+            "_parent_id"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "verticals_types_use_cards_parent_id_fk": {
+          "name": "verticals_types_use_cards_parent_id_fk",
+          "tableFrom": "verticals_types_use_cards",
+          "tableTo": "verticals",
+          "columnsFrom": [
+            "_parent_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
       "compositePrimaryKeys": {},
       "uniqueConstraints": {},
       "checkConstraints": {}
@@ -572,15 +686,457 @@
           "notNull": true,
           "autoincrement": false
         },
-        "feature_cards_benefit_id": {
-          "name": "feature_cards_benefit_id",
+        "benefits_title": {
+          "name": "benefits_title",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "types_title": {
+          "name": "types_title",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "(strftime('%Y-%m-%dT%H:%M:%fZ', 'now'))"
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "(strftime('%Y-%m-%dT%H:%M:%fZ', 'now'))"
+        }
+      },
+      "indexes": {
+        "verticals_updated_at_idx": {
+          "name": "verticals_updated_at_idx",
+          "columns": [
+            "updated_at"
+          ],
+          "isUnique": false
+        },
+        "verticals_created_at_idx": {
+          "name": "verticals_created_at_idx",
+          "columns": [
+            "created_at"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "case_studies_snapshot": {
+      "name": "case_studies_snapshot",
+      "columns": {
+        "_order": {
+          "name": "_order",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "_parent_id": {
+          "name": "_parent_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "title": {
+          "name": "title",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "value": {
+          "name": "value",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {
+        "case_studies_snapshot_order_idx": {
+          "name": "case_studies_snapshot_order_idx",
+          "columns": [
+            "_order"
+          ],
+          "isUnique": false
+        },
+        "case_studies_snapshot_parent_id_idx": {
+          "name": "case_studies_snapshot_parent_id_idx",
+          "columns": [
+            "_parent_id"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "case_studies_snapshot_parent_id_fk": {
+          "name": "case_studies_snapshot_parent_id_fk",
+          "tableFrom": "case_studies_snapshot",
+          "tableTo": "case_studies",
+          "columnsFrom": [
+            "_parent_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "case_studies_results": {
+      "name": "case_studies_results",
+      "columns": {
+        "_order": {
+          "name": "_order",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "_parent_id": {
+          "name": "_parent_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "metric": {
+          "name": "metric",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "result": {
+          "name": "result",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {
+        "case_studies_results_order_idx": {
+          "name": "case_studies_results_order_idx",
+          "columns": [
+            "_order"
+          ],
+          "isUnique": false
+        },
+        "case_studies_results_parent_id_idx": {
+          "name": "case_studies_results_parent_id_idx",
+          "columns": [
+            "_parent_id"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "case_studies_results_parent_id_fk": {
+          "name": "case_studies_results_parent_id_fk",
+          "tableFrom": "case_studies_results",
+          "tableTo": "case_studies",
+          "columnsFrom": [
+            "_parent_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "case_studies": {
+      "name": "case_studies",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "title": {
+          "name": "title",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "client_id": {
+          "name": "client_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "event_id": {
+          "name": "event_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "challenge": {
+          "name": "challenge",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "solution": {
+          "name": "solution",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "(strftime('%Y-%m-%dT%H:%M:%fZ', 'now'))"
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "(strftime('%Y-%m-%dT%H:%M:%fZ', 'now'))"
+        }
+      },
+      "indexes": {
+        "case_studies_client_idx": {
+          "name": "case_studies_client_idx",
+          "columns": [
+            "client_id"
+          ],
+          "isUnique": false
+        },
+        "case_studies_event_idx": {
+          "name": "case_studies_event_idx",
+          "columns": [
+            "event_id"
+          ],
+          "isUnique": false
+        },
+        "case_studies_updated_at_idx": {
+          "name": "case_studies_updated_at_idx",
+          "columns": [
+            "updated_at"
+          ],
+          "isUnique": false
+        },
+        "case_studies_created_at_idx": {
+          "name": "case_studies_created_at_idx",
+          "columns": [
+            "created_at"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "case_studies_client_id_clients_id_fk": {
+          "name": "case_studies_client_id_clients_id_fk",
+          "tableFrom": "case_studies",
+          "tableTo": "clients",
+          "columnsFrom": [
+            "client_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        },
+        "case_studies_event_id_events_id_fk": {
+          "name": "case_studies_event_id_events_id_fk",
+          "tableFrom": "case_studies",
+          "tableTo": "events",
+          "columnsFrom": [
+            "event_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "case_studies_rels": {
+      "name": "case_studies_rels",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "order": {
+          "name": "order",
           "type": "integer",
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false
         },
-        "feature_cards_type_id": {
-          "name": "feature_cards_type_id",
+        "parent_id": {
+          "name": "parent_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "path": {
+          "name": "path",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "testimonials_id": {
+          "name": "testimonials_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        }
+      },
+      "indexes": {
+        "case_studies_rels_order_idx": {
+          "name": "case_studies_rels_order_idx",
+          "columns": [
+            "order"
+          ],
+          "isUnique": false
+        },
+        "case_studies_rels_parent_idx": {
+          "name": "case_studies_rels_parent_idx",
+          "columns": [
+            "parent_id"
+          ],
+          "isUnique": false
+        },
+        "case_studies_rels_path_idx": {
+          "name": "case_studies_rels_path_idx",
+          "columns": [
+            "path"
+          ],
+          "isUnique": false
+        },
+        "case_studies_rels_testimonials_id_idx": {
+          "name": "case_studies_rels_testimonials_id_idx",
+          "columns": [
+            "testimonials_id"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "case_studies_rels_parent_fk": {
+          "name": "case_studies_rels_parent_fk",
+          "tableFrom": "case_studies_rels",
+          "tableTo": "case_studies",
+          "columnsFrom": [
+            "parent_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "case_studies_rels_testimonials_fk": {
+          "name": "case_studies_rels_testimonials_fk",
+          "tableFrom": "case_studies_rels",
+          "tableTo": "testimonials",
+          "columnsFrom": [
+            "testimonials_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "clients": {
+      "name": "clients",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "title": {
+          "name": "title",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "location": {
+          "name": "location",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "logo_id": {
+          "name": "logo_id",
           "type": "integer",
           "primaryKey": false,
           "notNull": false,
@@ -604,29 +1160,22 @@
         }
       },
       "indexes": {
-        "verticals_feature_cards_benefit_idx": {
-          "name": "verticals_feature_cards_benefit_idx",
+        "clients_logo_idx": {
+          "name": "clients_logo_idx",
           "columns": [
-            "feature_cards_benefit_id"
+            "logo_id"
           ],
           "isUnique": false
         },
-        "verticals_feature_cards_type_idx": {
-          "name": "verticals_feature_cards_type_idx",
-          "columns": [
-            "feature_cards_type_id"
-          ],
-          "isUnique": false
-        },
-        "verticals_updated_at_idx": {
-          "name": "verticals_updated_at_idx",
+        "clients_updated_at_idx": {
+          "name": "clients_updated_at_idx",
           "columns": [
             "updated_at"
           ],
           "isUnique": false
         },
-        "verticals_created_at_idx": {
-          "name": "verticals_created_at_idx",
+        "clients_created_at_idx": {
+          "name": "clients_created_at_idx",
           "columns": [
             "created_at"
           ],
@@ -634,25 +1183,12 @@
         }
       },
       "foreignKeys": {
-        "verticals_feature_cards_benefit_id_feature_cards_id_fk": {
-          "name": "verticals_feature_cards_benefit_id_feature_cards_id_fk",
-          "tableFrom": "verticals",
-          "tableTo": "feature_cards",
+        "clients_logo_id_media_id_fk": {
+          "name": "clients_logo_id_media_id_fk",
+          "tableFrom": "clients",
+          "tableTo": "media",
           "columnsFrom": [
-            "feature_cards_benefit_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "set null",
-          "onUpdate": "no action"
-        },
-        "verticals_feature_cards_type_id_feature_cards_id_fk": {
-          "name": "verticals_feature_cards_type_id_feature_cards_id_fk",
-          "tableFrom": "verticals",
-          "tableTo": "feature_cards",
-          "columnsFrom": [
-            "feature_cards_type_id"
+            "logo_id"
           ],
           "columnsTo": [
             "id"
@@ -825,15 +1361,22 @@
           "notNull": false,
           "autoincrement": false
         },
-        "feature_cards_id": {
-          "name": "feature_cards_id",
+        "verticals_id": {
+          "name": "verticals_id",
           "type": "integer",
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false
         },
-        "verticals_id": {
-          "name": "verticals_id",
+        "case_studies_id": {
+          "name": "case_studies_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "clients_id": {
+          "name": "clients_id",
           "type": "integer",
           "primaryKey": false,
           "notNull": false,
@@ -890,17 +1433,24 @@
           ],
           "isUnique": false
         },
-        "payload_locked_documents_rels_feature_cards_id_idx": {
-          "name": "payload_locked_documents_rels_feature_cards_id_idx",
-          "columns": [
-            "feature_cards_id"
-          ],
-          "isUnique": false
-        },
         "payload_locked_documents_rels_verticals_id_idx": {
           "name": "payload_locked_documents_rels_verticals_id_idx",
           "columns": [
             "verticals_id"
+          ],
+          "isUnique": false
+        },
+        "payload_locked_documents_rels_case_studies_id_idx": {
+          "name": "payload_locked_documents_rels_case_studies_id_idx",
+          "columns": [
+            "case_studies_id"
+          ],
+          "isUnique": false
+        },
+        "payload_locked_documents_rels_clients_id_idx": {
+          "name": "payload_locked_documents_rels_clients_id_idx",
+          "columns": [
+            "clients_id"
           ],
           "isUnique": false
         }
@@ -971,12 +1521,12 @@
           "onDelete": "cascade",
           "onUpdate": "no action"
         },
-        "payload_locked_documents_rels_feature_cards_fk": {
-          "name": "payload_locked_documents_rels_feature_cards_fk",
+        "payload_locked_documents_rels_verticals_fk": {
+          "name": "payload_locked_documents_rels_verticals_fk",
           "tableFrom": "payload_locked_documents_rels",
-          "tableTo": "feature_cards",
+          "tableTo": "verticals",
           "columnsFrom": [
-            "feature_cards_id"
+            "verticals_id"
           ],
           "columnsTo": [
             "id"
@@ -984,12 +1534,25 @@
           "onDelete": "cascade",
           "onUpdate": "no action"
         },
-        "payload_locked_documents_rels_verticals_fk": {
-          "name": "payload_locked_documents_rels_verticals_fk",
+        "payload_locked_documents_rels_case_studies_fk": {
+          "name": "payload_locked_documents_rels_case_studies_fk",
           "tableFrom": "payload_locked_documents_rels",
-          "tableTo": "verticals",
+          "tableTo": "case_studies",
           "columnsFrom": [
-            "verticals_id"
+            "case_studies_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "payload_locked_documents_rels_clients_fk": {
+          "name": "payload_locked_documents_rels_clients_fk",
+          "tableFrom": "payload_locked_documents_rels",
+          "tableTo": "clients",
+          "columnsFrom": [
+            "clients_id"
           ],
           "columnsTo": [
             "id"
@@ -1244,6 +1807,6 @@
   "internal": {
     "indexes": {}
   },
-  "id": "71d7e9fa-3cd3-4c0a-bfb7-f52ae7937c1b",
+  "id": "354be49f-4522-4e90-81c2-466b40f8aded",
   "prevId": "00000000-0000-0000-0000-000000000000"
 }
