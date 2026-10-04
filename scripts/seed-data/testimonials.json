@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "player_name": "Deb Fuller",
+    "player_title": "Attendee",
+    "event_id": 1,
+    "testimonial": "{\"root\":{\"children\":[{\"children\":[{\"detail\":0,\"format\":0,\"mode\":\"normal\",\"style\":\"\",\"text\":\"I played Bingo Bard at the Serious Play conference on the Duke University campus. Far from a trite bingo game that asks you to find someone who likes the same flavor of ice cream as you, Bingo Bard got me out and about on campus to places I would have never have explored otherwise. Trudging\u00a0through the heat to see the interior of the amazing chapel or wandering through the library to find medieval manuscripts, a case of glass eyes, and a special exhibit of game\u00a0miniatures gave me a fun break from the conference and some much-needed air-conditioning.\",\"type\":\"text\",\"version\":1}],\"direction\":null,\"format\":\"\",\"indent\":0,\"type\":\"paragraph\",\"version\":1,\"textFormat\":0,\"textStyle\":\"\"}],\"direction\":null,\"format\":\"\",\"indent\":0,\"type\":\"root\",\"version\":1}}",
+    "updated_at": "2026-08-23T00:30:10.093Z",
+    "created_at": "2026-08-23T00:30:10.093Z"
+  },
+  {
+    "id": 2,
+    "player_name": "Julia Franklin",
+    "player_title": "Attendee",
+    "event_id": 1,
+    "testimonial": "{\"root\":{\"children\":[{\"children\":[{\"detail\":0,\"format\":0,\"mode\":\"normal\",\"style\":\"\",\"text\":\"Playing Bingo Bard at the Serious Play Conference not only provided new ways to connect with people, but it sparked invitations to explore new places and spaces on campus that I didn't even know existed until seeing them on my board.\",\"type\":\"text\",\"version\":1}],\"direction\":null,\"format\":\"\",\"indent\":0,\"type\":\"paragraph\",\"version\":1,\"textFormat\":0,\"textStyle\":\"\"}],\"direction\":null,\"format\":\"\",\"indent\":0,\"type\":\"root\",\"version\":1}}",
+    "updated_at": "2026-08-23T00:30:45.078Z",
+    "created_at": "2026-08-23T00:30:45.078Z"
+  },
+  {
+    "id": 3,
+    "player_name": "Alym Amlani",
+    "player_title": "Attendee",
+    "event_id": 1,
+    "testimonial": "{\"root\":{\"children\":[{\"children\":[{\"detail\":0,\"format\":0,\"mode\":\"normal\",\"style\":\"\",\"text\":\"I played Bingo Bard at the Serious Play Conference last week and it was a wonderful way to introduce attendees to the various elements of the conference. The game was very easy to use, intuitive, and most importantly, fun!\",\"type\":\"text\",\"version\":1}],\"direction\":null,\"format\":\"\",\"indent\":0,\"type\":\"paragraph\",\"version\":1,\"textFormat\":0,\"textStyle\":\"\"}],\"direction\":null,\"format\":\"\",\"indent\":0,\"type\":\"root\",\"version\":1}}",
+    "updated_at": "2026-08-23T00:31:18.661Z",
+    "created_at": "2026-08-23T00:31:18.661Z"
+  },
+  {
+    "id": 4,
+    "player_name": "Paul Darvasi",
+    "player_title": "Executive Director Serious Play, Event Organizer",
+    "event_id": 1,
+    "testimonial": "{\"root\":{\"children\":[{\"children\":[{\"detail\":0,\"format\":0,\"mode\":\"normal\",\"style\":\"\",\"text\":\"Bingo Bard was a welcome addition to Serious Play. It was a fun, low-pressure way for attendees to explore the conference, engage with exhibitors and activities, and connect with one another throughout the event. We especially loved how the challenges encouraged people to notice and participate in parts of the conference they might otherwise have missed. It added an extra layer of playfulness and discovery that fit perfectly with the spirit of Serious Play, and the response from our community was overwhelmingly positive.\",\"type\":\"text\",\"version\":1}],\"direction\":null,\"format\":\"\",\"indent\":0,\"type\":\"paragraph\",\"version\":1,\"textFormat\":0,\"textStyle\":\"\"}],\"direction\":null,\"format\":\"\",\"indent\":0,\"type\":\"root\",\"version\":1}}",
+    "updated_at": "2026-08-23T00:35:32.851Z",
+    "created_at": "2026-08-23T00:32:38.300Z"
+  },
+  {
+    "id": 5,
+    "player_name": "Ernesto Escobar",
+    "player_title": "Executive Director Master of Engineering in Game Design, Development and Innovation at Duke University, Event Organizer",
+    "event_id": 1,
+    "testimonial": "{\"root\":{\"children\":[{\"children\":[{\"detail\":0,\"format\":0,\"mode\":\"normal\",\"style\":\"\",\"text\":\"I've experienced Bingo Bard as a participant with my 11-year-old, as well as a conference organizer. I saw how this game motivated my son to get out of his comfort zone by talking to many new people. As an event organizer, I saw how it got participants curious and exploring more than they would normally do. In both cases, it proved to be a powerful tool for structured exploration, leading to more connections and more fun.\",\"type\":\"text\",\"version\":1}],\"direction\":null,\"format\":\"\",\"indent\":0,\"type\":\"paragraph\",\"version\":1,\"textFormat\":0,\"textStyle\":\"\"}],\"direction\":null,\"format\":\"\",\"indent\":0,\"type\":\"root\",\"version\":1}}",
+    "updated_at": "2026-08-23T00:35:08.613Z",
+    "created_at": "2026-08-23T00:35:08.613Z"
+  },
+  {
+    "id": 6,
+    "player_name": "Karen Stritzinger",
+    "player_title": "Attendee",
+    "event_id": 2,
+    "testimonial": "{\"root\":{\"children\":[{\"children\":[{\"detail\":0,\"format\":0,\"mode\":\"normal\",\"style\":\"\",\"text\":\"I love how versatile the concept of Bingo Bard is and how it helps remind me to engage with parts of a conference I might have otherwise missed. Seeing it at local events, it\u2019s become something I look forward to each time. It\u2019s like a little scavenger hunt, combined with a to-do list that gives me little bursts of dopamine, and it was a fun surprise seeing the rewards people won at the end of the event! If I were an event organizer, I think I would really appreciate being able to use BB to direct the attendees toward lesser known booths or talks, and to be able to see metrics on the most popular areas.\",\"type\":\"text\",\"version\":1}],\"direction\":null,\"format\":\"\",\"indent\":0,\"type\":\"paragraph\",\"version\":1,\"textFormat\":0,\"textStyle\":\"\"}],\"direction\":null,\"format\":\"\",\"indent\":0,\"type\":\"root\",\"version\":1}}",
+    "updated_at": "2026-08-23T00:38:36.616Z",
+    "created_at": "2026-08-23T00:38:36.616Z"
+  },
+  {
+    "id": 7,
+    "player_name": "Anonymous",
+    "player_title": "Attendee",
+    "event_id": 4,
+    "testimonial": "{\"root\":{\"children\":[{\"children\":[{\"detail\":0,\"format\":0,\"mode\":\"normal\",\"style\":\"\",\"text\":\"I really enjoyed this, the experience was by far one of the best ice breaker type activities I have done and helped me walk around to talk with people which is something I am not the best at sometimes.\",\"type\":\"text\",\"version\":1}],\"direction\":null,\"format\":\"\",\"indent\":0,\"type\":\"paragraph\",\"version\":1,\"textFormat\":0,\"textStyle\":\"\"}],\"direction\":null,\"format\":\"\",\"indent\":0,\"type\":\"root\",\"version\":1}}",
+    "updated_at": "2026-08-23T00:39:26.736Z",
+    "created_at": "2026-08-23T00:39:26.736Z"
+  },
+  {
+    "id": 8,
+    "player_name": "DJ Ruegger",
+    "player_title": "Event Organizer",
+    "event_id": 3,
+    "testimonial": "{\"root\":{\"children\":[{\"children\":[{\"detail\":0,\"format\":0,\"mode\":\"normal\",\"style\":\"\",\"text\":\"The bingo game was a great addition to the OCIG event! It is a cool way to encourage attendees to thoroughly check out the exhibitors. They really enjoy figuring out the hints and 'gamifying' their time and what they see at the event. Definitely a unique interactive activity for the crowd!\",\"type\":\"text\",\"version\":1}],\"direction\":null,\"format\":\"\",\"indent\":0,\"type\":\"paragraph\",\"version\":1,\"textFormat\":0,\"textStyle\":\"\"}],\"direction\":null,\"format\":\"\",\"indent\":0,\"type\":\"root\",\"version\":1}}",
+    "updated_at": "2026-08-23T00:40:01.105Z",
+    "created_at": "2026-08-23T00:40:01.105Z"
+  },
+  {
+    "id": 9,
+    "player_name": "Brian McGuinness",
+    "player_title": "Attendee",
+    "event_id": 3,
+    "testimonial": "{\"root\":{\"children\":[{\"children\":[{\"detail\":0,\"format\":0,\"mode\":\"normal\",\"style\":\"\",\"text\":\"This was such a fun addition to an already really cool indie game festival. You get a bingo card and like a cool \\\"gamified\\\" scavenger hunt, you cross off things as you see them, hopefully getting a Bingo to win prizes.\",\"type\":\"text\",\"version\":1}],\"direction\":null,\"format\":\"\",\"indent\":0,\"type\":\"paragraph\",\"version\":1,\"textFormat\":0,\"textStyle\":\"\"},{\"children\":[],\"direction\":null,\"format\":\"\",\"indent\":0,\"type\":\"paragraph\",\"version\":1,\"textFormat\":0,\"textStyle\":\"\"}],\"direction\":null,\"format\":\"\",\"indent\":0,\"type\":\"root\",\"version\":1}}",
+    "updated_at": "2026-08-23T00:40:32.229Z",
+    "created_at": "2026-08-23T00:40:32.229Z"
+  },
+  {
+    "id": 10,
+    "player_name": "City of Raleigh",
+    "player_title": "Center Square Sponsor",
+    "event_id": 5,
+    "testimonial": "{\"root\":{\"children\":[{\"children\":[{\"detail\":0,\"format\":0,\"mode\":\"normal\",\"style\":\"\",\"text\":\"RIoT Demo night was (once again and even more) a huge success. As a partner with our\u00a0\",\"type\":\"text\",\"version\":1},{\"detail\":0,\"format\":2,\"mode\":\"normal\",\"style\":\"\",\"text\":\"Smart Raleigh\",\"type\":\"text\",\"version\":1},{\"detail\":0,\"format\":0,\"mode\":\"normal\",\"style\":\"\",\"text\":\"\u00a0program, the event provides opportunities to explore the latest entrepreneurial technology in our Triangle Region\u2014some of whom will expand beyond.\",\"type\":\"text\",\"version\":1}],\"direction\":null,\"format\":\"\",\"indent\":0,\"type\":\"paragraph\",\"version\":1,\"textFormat\":0,\"textStyle\":\"\"}],\"direction\":null,\"format\":\"\",\"indent\":0,\"type\":\"root\",\"version\":1}}",
+    "updated_at": "2026-08-23T00:42:20.496Z",
+    "created_at": "2026-08-23T00:42:20.496Z"
+  },
+  {
+    "id": 11,
+    "player_name": "Tom Snyder",
+    "player_title": "Event Organizer",
+    "event_id": 5,
+    "testimonial": "{\"root\":{\"children\":[{\"children\":[{\"detail\":0,\"format\":0,\"mode\":\"normal\",\"style\":\"\",\"text\":\"We kept hearing all night about how fun the bingo game was. The audience loved having a new way to engage our exhibitors and admitted that they met companies they otherwise would have skipped.\",\"type\":\"text\",\"version\":1}],\"direction\":null,\"format\":\"\",\"indent\":0,\"type\":\"paragraph\",\"version\":1,\"textFormat\":0,\"textStyle\":\"\"}],\"direction\":null,\"format\":\"\",\"indent\":0,\"type\":\"root\",\"version\":1}}",
+    "updated_at": "2026-08-23T00:42:48.646Z",
+    "created_at": "2026-08-23T00:42:48.646Z"
+  },
+  {
+    "id": 12,
+    "player_name": "Rachael Newberry",
+    "player_title": "Event Organizer",
+    "event_id": 5,
+    "testimonial": "{\"root\":{\"children\":[{\"children\":[{\"detail\":0,\"format\":0,\"mode\":\"normal\",\"style\":\"\",\"text\":\"RIoT has been an event organizer for more than a decade and we're always aiming to push the envelope when it comes to wow-factors and audience engagement. Bingo Bard was a simple and effective way to inject more fun and whimsy into our tech exhibiting event at the Raleigh Convention Center. The bingo game was custom designed to drive event participants to our exhibitors. Bingo is universal, and as I expected, it activated a part of our audience that would typically be more passive in approaching the startups and sponsors that we were showcasing at RIoT Demo Night.\",\"type\":\"text\",\"version\":1}],\"direction\":null,\"format\":\"\",\"indent\":0,\"type\":\"paragraph\",\"version\":1,\"textFormat\":0,\"textStyle\":\"\"}],\"direction\":null,\"format\":\"\",\"indent\":0,\"type\":\"root\",\"version\":1}}",
+    "updated_at": "2026-08-23T00:43:23.040Z",
+    "created_at": "2026-08-23T00:43:23.040Z"
+  }
+]
