@@ -26,5 +26,14 @@ export const Testimonials: CollectionConfig = {
 		type: 'richText',
 		required: true,
 	},
+   {
+      name: 'shortTestimonial',
+      label: 'Short Testimonial',
+      type: 'textarea',
+      required: false,
+      maxLength: 200,
+      admin: {
+        description: 'A 1–2 sentence version for cards, sliders, and pull quotes. Max 200 characters.',
+      },
   ],
 }
