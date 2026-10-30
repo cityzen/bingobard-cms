@@ -71,8 +71,10 @@ export interface Config {
     media: Media;
     events: Event;
     testimonials: Testimonial;
-    'feature-cards': FeatureCard;
     verticals: Vertical;
+    'case-studies': CaseStudy;
+    clients: Client;
+    posts: Post;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -84,8 +86,10 @@ export interface Config {
     media: MediaSelect<false> | MediaSelect<true>;
     events: EventsSelect<false> | EventsSelect<true>;
     testimonials: TestimonialsSelect<false> | TestimonialsSelect<true>;
-    'feature-cards': FeatureCardsSelect<false> | FeatureCardsSelect<true>;
     verticals: VerticalsSelect<false> | VerticalsSelect<true>;
+    'case-studies': CaseStudiesSelect<false> | CaseStudiesSelect<true>;
+    clients: ClientsSelect<false> | ClientsSelect<true>;
+    posts: PostsSelect<false> | PostsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -175,8 +179,21 @@ export interface Event {
   id: number;
   title: string;
   location: string;
+  client?: (number | null) | Client;
   startDate: string;
   endDate: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "clients".
+ */
+export interface Client {
+  id: number;
+  title: string;
+  location?: string | null;
+  logo?: (number | null) | Media;
   updatedAt: string;
   createdAt: string;
 }
@@ -204,19 +221,10 @@ export interface Testimonial {
     };
     [k: string]: unknown;
   };
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "feature-cards".
- */
-export interface FeatureCard {
-  id: number;
-  type: 'benefit' | 'type';
-  icon: string;
-  title: string;
-  description: string;
+  /**
+   * A 1–2 sentence version for cards, sliders, and pull quotes. Max 200 characters.
+   */
+  shortTestimonial?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -229,8 +237,149 @@ export interface Vertical {
   title: string;
   heroTitle: string;
   heroDescription: string;
-  featureCardsBenefit?: (number | null) | FeatureCard;
-  featureCardsType?: (number | null) | FeatureCard;
+  benefits: Benefits;
+  types: Types;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Benefits".
+ */
+export interface Benefits {
+  title: string;
+  benefitCards?:
+    | {
+        icon?: string | null;
+        benefit: string;
+        description: string;
+        id?: string | null;
+      }[]
+    | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Types".
+ */
+export interface Types {
+  title: string;
+  useCards?:
+    | {
+        icon?: string | null;
+        use: string;
+        description: string;
+        id?: string | null;
+      }[]
+    | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "case-studies".
+ */
+export interface CaseStudy {
+  id: number;
+  title: string;
+  client: number | Client;
+  event: number | Event;
+  challenge: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  solution: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  snapshot?:
+    | {
+        title: string;
+        value: string;
+        id?: string | null;
+      }[]
+    | null;
+  results?:
+    | {
+        metric: string;
+        result: string;
+        id?: string | null;
+      }[]
+    | null;
+  testimonials?: (number | Testimonial)[] | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "posts".
+ */
+export interface Post {
+  id: number;
+  postMeta: {
+    title: string;
+    description: string;
+    keywords?: string | null;
+  };
+  title: string;
+  postImage: number | Media;
+  layout?:
+    | (
+        | {
+            quote?: string | null;
+            author?: string | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'quote';
+          }
+        | {
+            content?: {
+              root: {
+                type: string;
+                children: {
+                  type: any;
+                  version: number;
+                  [k: string]: unknown;
+                }[];
+                direction: ('ltr' | 'rtl') | null;
+                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                indent: number;
+                version: number;
+              };
+              [k: string]: unknown;
+            } | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'content';
+          }
+        | {
+            type?: ('info' | 'success' | 'warning' | 'danger') | null;
+            message?: string | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'alert';
+          }
+      )[]
+    | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -275,12 +424,20 @@ export interface PayloadLockedDocument {
         value: number | Testimonial;
       } | null)
     | ({
-        relationTo: 'feature-cards';
-        value: number | FeatureCard;
-      } | null)
-    | ({
         relationTo: 'verticals';
         value: number | Vertical;
+      } | null)
+    | ({
+        relationTo: 'case-studies';
+        value: number | CaseStudy;
+      } | null)
+    | ({
+        relationTo: 'clients';
+        value: number | Client;
+      } | null)
+    | ({
+        relationTo: 'posts';
+        value: number | Post;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -369,6 +526,7 @@ export interface MediaSelect<T extends boolean = true> {
 export interface EventsSelect<T extends boolean = true> {
   title?: T;
   location?: T;
+  client?: T;
   startDate?: T;
   endDate?: T;
   updatedAt?: T;
@@ -383,18 +541,7 @@ export interface TestimonialsSelect<T extends boolean = true> {
   playerTitle?: T;
   event?: T;
   testimonial?: T;
-  updatedAt?: T;
-  createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "feature-cards_select".
- */
-export interface FeatureCardsSelect<T extends boolean = true> {
-  type?: T;
-  icon?: T;
-  title?: T;
-  description?: T;
+  shortTestimonial?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -406,8 +553,121 @@ export interface VerticalsSelect<T extends boolean = true> {
   title?: T;
   heroTitle?: T;
   heroDescription?: T;
-  featureCardsBenefit?: T;
-  featureCardsType?: T;
+  benefits?: T | BenefitsSelect<T>;
+  types?: T | TypesSelect<T>;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Benefits_select".
+ */
+export interface BenefitsSelect<T extends boolean = true> {
+  title?: T;
+  benefitCards?:
+    | T
+    | {
+        icon?: T;
+        benefit?: T;
+        description?: T;
+        id?: T;
+      };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Types_select".
+ */
+export interface TypesSelect<T extends boolean = true> {
+  title?: T;
+  useCards?:
+    | T
+    | {
+        icon?: T;
+        use?: T;
+        description?: T;
+        id?: T;
+      };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "case-studies_select".
+ */
+export interface CaseStudiesSelect<T extends boolean = true> {
+  title?: T;
+  client?: T;
+  event?: T;
+  challenge?: T;
+  solution?: T;
+  snapshot?:
+    | T
+    | {
+        title?: T;
+        value?: T;
+        id?: T;
+      };
+  results?:
+    | T
+    | {
+        metric?: T;
+        result?: T;
+        id?: T;
+      };
+  testimonials?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "clients_select".
+ */
+export interface ClientsSelect<T extends boolean = true> {
+  title?: T;
+  location?: T;
+  logo?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "posts_select".
+ */
+export interface PostsSelect<T extends boolean = true> {
+  postMeta?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        keywords?: T;
+      };
+  title?: T;
+  postImage?: T;
+  layout?:
+    | T
+    | {
+        quote?:
+          | T
+          | {
+              quote?: T;
+              author?: T;
+              id?: T;
+              blockName?: T;
+            };
+        content?:
+          | T
+          | {
+              content?: T;
+              id?: T;
+              blockName?: T;
+            };
+        alert?:
+          | T
+          | {
+              type?: T;
+              message?: T;
+              id?: T;
+              blockName?: T;
+            };
+      };
   updatedAt?: T;
   createdAt?: T;
 }

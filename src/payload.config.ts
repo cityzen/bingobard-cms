@@ -1,5 +1,6 @@
 import fs from 'fs'
 import path from 'path'
+// import {seoPlugin} from 'payloadcms/plugin-seo';
 import { sqliteD1Adapter } from '@payloadcms/db-d1-sqlite'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import { buildConfig } from 'payload'
@@ -13,8 +14,10 @@ import { Users } from './collections/Users'
 import { Media } from './collections/Media'
 import { Events } from './collections/Events'
 import { Testimonials } from './collections/Testimonials'
-import { FeatureCards } from './collections/FeatureCards'
 import { Verticals } from './collections/Verticals'
+import { CaseStudies } from './collections/CaseStudies'
+import { Clients } from './collections/Clients'
+import { Posts } from './collections/Posts'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -67,13 +70,32 @@ export default buildConfig({
     importMap: {
       baseDir: path.resolve(dirname),
     },
+    livePreview: {
+      url: ({ data, collectionConfig }) =>
+        collectionConfig ? `/preview/${collectionConfig.slug}/${data.id}` : '/',
+      collections: ['case-studies', 'verticals'],
+      breakpoints: [
+        { label: 'Mobile', name: 'mobile', width: 375, height: 667 },
+        { label: 'Tablet', name: 'tablet', width: 768, height: 1024 },
+        { label: 'Desktop', name: 'desktop', width: 1440, height: 900 },
+      ],
+    },
   },
   email: resendAdapter({
     defaultFromAddress: 'dev@payloadcms.com',
     defaultFromName: 'Payload CMS',
     apiKey: process.env.RESEND_API_KEY || '',
   }),
-  collections: [Users, Media, Events, Testimonials, FeatureCards, Verticals],
+  collections: [
+    Users,
+    Media,
+    Events,
+    Testimonials,
+    Verticals,
+    CaseStudies,
+    Clients,
+    Posts
+  ],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
@@ -90,12 +112,30 @@ export default buildConfig({
 })
 
 // Adapted from https://github.com/opennextjs/opennextjs-cloudflare/blob/d00b3a13e42e65aad76fba41774815726422cc39/packages/cloudflare/src/api/cloudflare-context.ts#L328C36-L328C46
+//
+// Cached on `globalThis` (not just a module-level const) because Next's dev
+// server compiles separate module graphs per route segment — each one would
+// otherwise re-evaluate this file and call getPlatformProxy() fresh, spinning
+// up its own miniflare instance against the same local D1 file concurrently.
+// That race is what causes "database is locked: SQLITE_BUSY_RECOVERY" on cold
+// start. globalThis survives across those separate module instances within
+// the same process, so the proxy — and the D1 connection it holds — is only
+// created once.
+declare global {
+  // eslint-disable-next-line no-var
+  var __cloudflarePlatformProxy: Promise<CloudflareContext> | undefined
+}
+
 function getCloudflareContextFromWrangler(): Promise<CloudflareContext> {
-  return import(/* webpackIgnore: true */ `${'__wrangler'.replaceAll('_', '')}`).then(
-    ({ getPlatformProxy }) =>
+  if (!globalThis.__cloudflarePlatformProxy) {
+    globalThis.__cloudflarePlatformProxy = import(
+      /* webpackIgnore: true */ `${'__wrangler'.replaceAll('_', '')}`
+    ).then(({ getPlatformProxy }) =>
       getPlatformProxy({
         environment: process.env.CLOUDFLARE_ENV,
         remoteBindings: isProduction,
       } satisfies GetPlatformProxyOptions),
-  )
+    )
+  }
+  return globalThis.__cloudflarePlatformProxy
 }

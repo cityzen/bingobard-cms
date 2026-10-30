@@ -62,6 +62,17 @@ This will take you to Cloudflare to login and then you can use the Wrangler CLI 
 
 Wrangler is pretty smart so it will automatically bind your services for local development just by running `pnpm dev`.
 
+## Local Development Workflow
+
+Local dev D1 is **push-synced, not migration-tracked**. When you change a collection (add/remove/rename a field, add a new collection), the dev server reconciles the local database with your current config automatically — you don't need to create or run a migration to iterate locally. Migrations only matter once, right before you deploy (see [Deployments](#deployments) below).
+
+A few habits that keep this smooth:
+
+- **After editing a collection file or `payload.config.ts`, run `pnpm run dev:reset`.** Payload's admin instance doesn't always pick up config changes via hot-reload on its own — you can end up with the admin UI rendering fields that no longer exist in your source. This script kills whatever's on port 3000 and starts a clean dev server.
+- **If local data or schema ever looks wrong/stuck, run `pnpm run dev:reset-db`.** This wipes the local D1 emulation (`.wrangler/state`) so it rebuilds from scratch against your current collection configs on the next `pnpm dev`. It only touches your local sandbox — production D1 is a separate resource, untouched by this. Prefer this over hand-editing the local `.sqlite` file directly; local schema patches drift from what Payload's own push logic expects and cause confusing collisions later.
+- **When a field's type or purpose changes (not just its label), give it a new name** rather than reusing the old one — e.g. going from a flat `quote` text field to a `testimonials` relationship. Payload's migration generator has to interactively ask "is this a rename or a new column?" when a name is reused across an incompatible type change, which can't be answered in non-interactive contexts (CI, some agent/automation setups). A fresh name sidesteps the prompt entirely.
+- **Keep every `@payloadcms/*` package (and `payload` itself) pinned to the exact same version** — no `^` ranges. A single package drifting a patch version ahead of the rest trips Payload's own dependency check and breaks `payload migrate`, `getPayload()`, and the dev server.
+
 ## Deployments
 
 When you're ready to deploy, first make sure you have created your migrations:

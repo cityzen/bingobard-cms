@@ -40,5 +40,6 @@ export const Testimonials: CollectionConfig = {
       admin: {
         description: 'A 1–2 sentence version for cards, sliders, and pull quotes. Max 200 characters.',
       },
+    },
   ],
 }
